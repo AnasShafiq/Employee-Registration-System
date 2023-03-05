@@ -73,6 +73,7 @@ Connection con;
                 {
                     e1.printStackTrace();
                 }
+                System.out.println("Hello world");
 
             }
 
