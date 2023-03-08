@@ -133,5 +133,66 @@ Connection con;
             }
 
         });
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String empid,empname,salary,mobile;
+                empname = txtName.getText();
+                salary = txtSalary.getText();
+                mobile = txtMobile.getText();
+                empid = txtId.getText();
+
+                try {
+                    pst = con.prepareStatement("update employee set empname = ?,salary = ?,mobile = ? where id = ?");
+                    pst.setString(1, empname);
+                    pst.setString(2, salary);
+                    pst.setString(3, mobile);
+                    pst.setString(4, empid);
+
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Record Updated Successfully !");
+                    table_load();
+                    txtName.setText("");
+                    txtSalary.setText("");
+                    txtMobile.setText("");
+                    txtName.requestFocus();
+                }
+
+                catch (SQLException e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String empid;
+                empid = txtId.getText();
+
+                try {
+                    pst = con.prepareStatement("delete from employee  where id = ?");
+
+                    pst.setString(1, empid);
+
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Record Deleted Successfully !");
+                    table_load();
+                    txtName.setText("");
+                    txtSalary.setText("");
+                    txtMobile.setText("");
+                    txtName.requestFocus();
+                }
+
+                catch (SQLException e1)
+                {
+
+                    e1.printStackTrace();
+                }
+
+
+
+            }
+        });
     }
 }
